@@ -1,0 +1,36 @@
+{
+	"images": [
+		{
+			"id": 1,
+			"ratio": "tall"
+		},
+		{
+			"id": 2,
+			"ratio": "square"
+		},
+		{
+			"id": 3,
+			"ratio": "square"
+		},
+		{
+			"id": 4,
+			"ratio": "square"
+		},
+		{
+			"id": 5,
+			"ratio": "square"
+		},
+		{
+			"id": 6,
+			"ratio": "tall"
+		},
+		{
+			"id": 7,
+			"ratio": "square"
+		},
+		{
+			"id": 8,
+			"ratio": "square"
+		}
+	]
+}
