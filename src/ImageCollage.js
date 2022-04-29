@@ -6,22 +6,10 @@ const MyImage = (props) => {
 	const [size, setSize] = useState(null);
 	const [ratio, setRatio] = useState({ height: 2, width: 2 });
 
-	// useEffect(() => {}, [size]);
-
 	function handleLoadImage(natural) {
 		setSize(natural);
-		let h = 0;
-		let w = 0;
-		if (natural.naturalHeight > natural.naturalWidth) {
-			h = 2;
-			w = 1;
-		} else if (natural.naturalHeight < natural.naturalWidth) {
-			h = 1;
-			w = 2;
-		} else {
-			h = 1;
-			w = 1;
-		}
+		let h = natural.naturalHeight > natural.naturalWidth ? 2 : 1;
+		let w = natural.naturalHeight < natural.naturalWidth ? 2 : 1;
 		setRatio({ height: h, width: w });
 	}
 
@@ -38,27 +26,29 @@ const MyImage = (props) => {
 	);
 };
 
-function getImagePaths(directory) {
+function getImagePaths(directory, folder) {
 	let images = [];
 	directory
 		.keys()
 		.map((item, index) =>
-			images.push("/resources/2D/" + item.replace("./", ""))
+			images.push("/resources/" + folder + "/" + item.replace("./", ""))
 		);
 	return images;
 }
 
-const ImageCollage = () => {
+const ImageCollage = (props) => {
 	const [imagePaths, setImagePaths] = useState([]);
+	let directory = null
 
-	const directory = require.context(
-		"../public/resources/2D",
-		false,
-		/\.(png|jpe?g|svg)$/
-	);
+	if (props.folder == "2D") {
+		directory = require.context("../public/resources/2D", false, /\.(png|jpe?g|svg)$/);
+	}
+	else if (props.folder == "3D"){
+		directory = require.context("../public/resources/3D", false, /\.(png|jpe?g|svg)$/);
+	}
 
 	useEffect(() => {
-		setImagePaths(getImagePaths(directory));
+		setImagePaths(getImagePaths(directory, props.folder));
 	}, []);
 
 	return (
@@ -76,7 +66,7 @@ const Grid = styled.div`
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	grid-template-rows: repeat(5, clamp(100px, 300px, 1000px));
-	grid-gap: 0.5rem;
+	grid-gap: 0.75rem;
 	grid-auto-flow: dense;
 	justify-content: center;
 `;

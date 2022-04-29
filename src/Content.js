@@ -4,6 +4,7 @@ import Card from "./Card";
 import { FaArrowRight, FaArrowLeft, FaHeadphonesAlt } from "react-icons/fa";
 import { BsFillPersonLinesFill, BsBrush } from "react-icons/bs";
 import { BiCube } from "react-icons/bi";
+import { TiBusinessCard } from "react-icons/ti";
 import { theme } from "./UI/Theme";
 import IconTextButton from "./IconTextButton";
 
@@ -21,9 +22,9 @@ const Content = () => {
 		let mod = index;
 
 		if (index === 0) {
-			mod = 4;
+			mod = 5;
 		}
-		if (index === 5) {
+		if (index === 6) {
 			mod = 1;
 		}
 
@@ -88,6 +89,12 @@ const Content = () => {
 							currentIndex={index}
 							text="MUSIC"
 						/>
+						<IconTextButton
+							IconComponent={TiBusinessCard}
+							baseIndex={5}
+							currentIndex={index}
+							text="BUSINESS"
+						/>
 					</div>
 
 					<SwipeButton slide="right" text="RIGHT">
@@ -118,14 +125,19 @@ const Content = () => {
 				</SwiperSlide>
 				<SwiperSlide style={{ overflowY: "scroll" }}>
 					<Card title="MY ART">
-						<ImageCollage />
+						<ImageCollage folder="2D" />
+					</Card>
+				</SwiperSlide>
+				<SwiperSlide style={{ overflowY: "scroll" }}>
+					<Card title="MY 3D">
+						<ImageCollage folder="3D" />
 					</Card>
 				</SwiperSlide>
 				<SwiperSlide>
-					<Card title="MY 3D" />
+					<Card title="MY MUSIC" />
 				</SwiperSlide>
 				<SwiperSlide>
-					<Card title="MY MUSIC" />
+					<Card title="BUSINESS" />
 				</SwiperSlide>
 			</Swiper>
 		</CenterContent>
@@ -134,10 +146,11 @@ const Content = () => {
 
 const CenterContent = styled.div`
 	margin-top: 15vh;
-	width: 50vw;
+	width: 40vw;
 	margin-left: auto;
 	margin-right: auto;
 	border: 3px solid ${theme.color.primary};
+	border-radius: 22px;
 `;
 
 export default Content;
