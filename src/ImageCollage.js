@@ -1,30 +1,7 @@
 import React, { useEffect, useState, createRef } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-
-const MyImage = (props) => {
-	const [size, setSize] = useState(null);
-	const [ratio, setRatio] = useState({ height: 2, width: 2 });
-
-	function handleLoadImage(natural) {
-		setSize(natural);
-		let h = natural.naturalHeight > natural.naturalWidth ? 2 : 1;
-		let w = natural.naturalHeight < natural.naturalWidth ? 2 : 1;
-		setRatio({ height: h, width: w });
-	}
-
-	return (
-		<ImageContainer width={ratio.width} height={ratio.height}>
-			<Image
-				objectFit="cover"
-				src={props.path}
-				layout="fill"
-				onLoadingComplete={handleLoadImage}
-				loading={"eager"}
-			/>
-		</ImageContainer>
-	);
-};
+import MyImage from "./MyImage";
 
 function getImagePaths(directory, folder) {
 	let images = [];
@@ -38,13 +15,20 @@ function getImagePaths(directory, folder) {
 
 const ImageCollage = (props) => {
 	const [imagePaths, setImagePaths] = useState([]);
-	let directory = null
+	let directory = null;
 
 	if (props.folder == "2D") {
-		directory = require.context("../public/resources/2D", false, /\.(png|jpe?g|svg)$/);
-	}
-	else if (props.folder == "3D"){
-		directory = require.context("../public/resources/3D", false, /\.(png|jpe?g|svg)$/);
+		directory = require.context(
+			"../public/resources/2D",
+			false,
+			/\.(png|jpe?g|svg)$/
+		);
+	} else if (props.folder == "3D") {
+		directory = require.context(
+			"../public/resources/3D",
+			false,
+			/\.(png|jpe?g|svg)$/
+		);
 	}
 
 	useEffect(() => {
@@ -54,7 +38,7 @@ const ImageCollage = (props) => {
 	return (
 		<Grid>
 			{imagePaths.map((path, index) => (
-				<MyImage key={index} path={path} />
+				<MyImage isclickable={true} onClickImage={props.onClickImage} key={index} path={path} />
 			))}
 		</Grid>
 	);
@@ -64,16 +48,12 @@ export default ImageCollage;
 
 const Grid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	grid-template-rows: repeat(5, clamp(100px, 300px, 1000px));
-	grid-gap: 0.75rem;
+	grid-template-columns: repeat(3, minmax(50px, 1fr));
+	grid-gap: 0.5vw;
 	grid-auto-flow: dense;
 	justify-content: center;
-`;
 
-const ImageContainer = styled.div`
-	position: relative;
-
-	grid-column: span ${(props) => props.width};
-	grid-row: span ${(props) => props.height};
+	@media only screen and (max-width: 768px) {
+		grid-template-columns: repeat(1, minmax(100px, 1fr));
+	}
 `;

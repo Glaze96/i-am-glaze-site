@@ -38,6 +38,8 @@ const ButtonStyle = styled.button`
 	border: none;
 	color: ${theme.color.gray};
 	cursor: pointer;
+	margin-left: 10px;
+	margin-right: 10px;
 	
 	&:hover {
 		color: ${theme.color.primary}

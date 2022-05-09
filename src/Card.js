@@ -8,9 +8,7 @@ const Card = (props) => {
 			<TitleBox>
 				<h1>{props.title}</h1>
 			</TitleBox>
-			<div style={{ padding: "25px" }}>
-				{props.children}
-			</div>
+			<div style={{ padding: "25px" }}>{props.children}</div>
 		</ContentBox>
 	);
 };
