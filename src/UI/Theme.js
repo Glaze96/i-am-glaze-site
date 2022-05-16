@@ -11,6 +11,12 @@ const theme = {
 		text: "#ffffff",
 		gray: "#cfcfcf",
 	},
+
+  contextSize: {
+    large: 1500,
+    medium: 900,
+    small: 800
+  }  
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -44,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
   }
   p {
     font-family: "RalewayMedium";
-    font-size: 15px;
+    font-size: 16px;
   }
   * {
     margin: 0;

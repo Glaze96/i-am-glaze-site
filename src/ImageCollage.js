@@ -48,12 +48,13 @@ export default ImageCollage;
 
 const Grid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(3, minmax(50px, 1fr));
-	grid-gap: 0.5vw;
+	grid-template-columns: repeat(4, minmax(50px, 1fr));
+	grid-gap: 20px;
 	grid-auto-flow: dense;
 	justify-content: center;
 
 	@media only screen and (max-width: 768px) {
-		grid-template-columns: repeat(1, minmax(100px, 1fr));
+		grid-gap: 10px;
+		grid-template-columns: repeat(2, minmax(50px, 1fr));
 	}
 `;

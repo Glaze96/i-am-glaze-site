@@ -8,14 +8,16 @@ const Card = (props) => {
 			<TitleBox>
 				<h1>{props.title}</h1>
 			</TitleBox>
-			<div style={{ padding: "25px" }}>{props.children}</div>
+			<div>
+				<div style={{ padding: "25px" }}>{props.children}</div>
+			</div>
 		</ContentBox>
 	);
 };
 
 const TitleBox = styled.div`
-	border-bottom: 3px solid ${theme.color.primary};
-	border-top: 3px solid ${theme.color.primary};
+	border-bottom: 2px solid ${theme.color.primary};
+	border-top: 2px solid ${theme.color.primary};
 `;
 
 const ContentBox = styled.div`

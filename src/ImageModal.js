@@ -16,7 +16,7 @@ const ImageModal = (props) => {
 };
 
 const ModalWrapper = styled.div`
-	width: clamp(20vw, 25vw, 700px);
+	width: clamp(20vw, 50vw, 1000px);
 	border: 4px solid ${theme.color.primary};
 	border-radius: 22px;
 	padding: 30px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import Card from "./Card";
 import { FaArrowRight, FaArrowLeft, FaHeadphonesAlt } from "react-icons/fa";
@@ -17,16 +17,15 @@ import SwipeButton from "./SwipeButton";
 import ImageCollage from "./ImageCollage";
 import ImageModal from "./ImageModal";
 
-import ReactMarkdown from "react-markdown";
-
 import AboutMe from "./AboutMe";
+import { ResponsiveContext } from "./UseResposiveContext";
 
 const Content = () => {
 	const [index, setIndex] = useState(0);
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [currentImage, setCurrentImage] = useState();
 
-	const numSlides = 5;
+	const numSlides = 3;
 
 	const SlideChangeHandler = (index) => {
 		let mod = index;
@@ -42,7 +41,6 @@ const Content = () => {
 	};
 
 	function openModal(imagePath) {
-		console.log("opened modal path: ", imagePath);
 		setCurrentImage(imagePath);
 		setIsOpen(true);
 	}
@@ -70,112 +68,166 @@ const Content = () => {
 		},
 	};
 
-	return (
-		<>
-			<CenterContent>
-				<Swiper
-					spaceBetween={0}
-					slidesPerView={1}
+	const size = useContext(ResponsiveContext);
+
+	const content = (
+		<CenterContent>
+			<Swiper
+				spaceBetween={0}
+				slidesPerView={1}
+				style={{
+					display: "flex",
+					flexDirection: "column-reverse",
+				}}
+				onSlideChange={(e) => SlideChangeHandler(e.activeIndex)}
+				onSwiper={(e) => SlideChangeHandler(e.activeIndex)}
+				loop="true"
+				allowTouchMove={false}
+			>
+				<div
 					style={{
 						display: "flex",
-						flexDirection: "column-reverse",
+						justifyContent: "space-between",
 					}}
-					onSlideChange={(e) => SlideChangeHandler(e.activeIndex)}
-					onSwiper={(e) => SlideChangeHandler(e.activeIndex)}
-					loop="true"
-					allowTouchMove={false}
 				>
-					<div
+					<SwipeButton slide="left" text="LEFT">
+						<FaArrowLeft size={35} />
+					</SwipeButton>
+					<div style={{ padding: "10px" }}>
+						<div
+							style={{
+								display: "flex",
+								justifyContent: "space-between",
+								gap: "15px",
+								margin: 0,
+							}}
+						>
+							<IconTextButton
+								IconComponent={BsFillPersonLinesFill}
+								baseIndex={1}
+								currentIndex={index}
+								text="ABOUT"
+								iconSize={35}
+							/>
+							<IconTextButton
+								IconComponent={BsBrush}
+								baseIndex={2}
+								currentIndex={index}
+								text="ART"
+								iconSize={35}
+							/>
+							<IconTextButton
+								IconComponent={BiCube}
+								baseIndex={3}
+								currentIndex={index}
+								text="3D"
+								iconSize={35}
+							/>
+						</div>
+					</div>
+					<SwipeButton slide="right" text="RIGHT">
+						<FaArrowRight size={35} />
+					</SwipeButton>
+				</div>
+				<SwiperSlide>
+					<Card title="ABOUT ME">
+						<AboutMe />
+					</Card>
+				</SwiperSlide>
+				<SwiperSlide style={{ overflowY: "scroll" }}>
+					<Card title="MY ART">
+						<ImageCollage folder="2D" onClickImage={openModal} />
+					</Card>
+				</SwiperSlide>
+				<SwiperSlide style={{ overflowY: "scroll" }}>
+					<Card title="MY 3D">
+						<ImageCollage folder="3D" onClickImage={openModal} />
+					</Card>
+				</SwiperSlide>
+			</Swiper>
+		</CenterContent>
+	);
+
+	return (
+		<>
+			{size.width < theme.contextSize.small ? (
+				<>
+					<Swiper
+						spaceBetween={0}
+						slidesPerView={1}
 						style={{
 							display: "flex",
-							justifyContent: "space-between",
-							marginBottom: "10px",
-							marginTop: "10px",
+							flexDirection: "column-reverse",
+							height: "80vh",
 						}}
+						onSlideChange={(e) => SlideChangeHandler(e.activeIndex)}
+						onSwiper={(e) => SlideChangeHandler(e.activeIndex)}
+						loop="true"
+						allowTouchMove={false}
 					>
-						<SwipeButton slide="left" text="LEFT">
-							<FaArrowLeft size={35} />
-						</SwipeButton>
-						<div style={{ margin: "0 auto" }}>
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "space-between",
-									gap: "15px",
-								}}
-							>
-								<IconTextButton
-									IconComponent={BsFillPersonLinesFill}
-									baseIndex={1}
-									currentIndex={index}
-									text="ABOUT"
-									iconSize={35}
-								/>
-								<IconTextButton
-									IconComponent={BsBrush}
-									baseIndex={2}
-									currentIndex={index}
-									text="ART"
-									iconSize={35}
-								/>
-								<IconTextButton
-									IconComponent={BiCube}
-									baseIndex={3}
-									currentIndex={index}
-									text="3D"
-									iconSize={35}
-								/>
-								<IconTextButton
-									IconComponent={FaHeadphonesAlt}
-									baseIndex={4}
-									currentIndex={index}
-									text="MUSIC"
-									iconSize={35}
-								/>
-								<IconTextButton
-									IconComponent={TiBusinessCard}
-									baseIndex={5}
-									currentIndex={index}
-									text="BUSINESS"
-									iconSize={35}
-								/>
+						<div style={{}}>
+							<div style={{ padding: "5px" }}>
+								<div
+									style={{
+										display: "flex",
+										justifyContent: "space-between",
+										margin: 0,
+									}}
+								>
+									<IconTextButton
+										IconComponent={BsFillPersonLinesFill}
+										baseIndex={1}
+										currentIndex={index}
+										text="ABOUT"
+										iconSize={35}
+									/>
+									<IconTextButton
+										IconComponent={BsBrush}
+										baseIndex={2}
+										currentIndex={index}
+										text="ART"
+										iconSize={35}
+									/>
+									<IconTextButton
+										IconComponent={BiCube}
+										baseIndex={3}
+										currentIndex={index}
+										text="3D"
+										iconSize={35}
+									/>
+								</div>
 							</div>
 						</div>
-						<SwipeButton slide="right" text="RIGHT">
-							<FaArrowRight size={35} />
-						</SwipeButton>
-					</div>
-					<SwiperSlide>
-						<Card title="ABOUT ME">
-							<AboutMe />
-						</Card>
-					</SwiperSlide>
-					<SwiperSlide style={{ overflowY: "scroll" }}>
-						<Card title="MY ART">
-							<ImageCollage folder="2D" onClickImage={openModal} />
-						</Card>
-					</SwiperSlide>
-					<SwiperSlide style={{ overflowY: "scroll" }}>
-						<Card title="MY 3D">
-							<ImageCollage folder="3D" onClickImage={openModal} />
-						</Card>
-					</SwiperSlide>
-					<SwiperSlide>
-						<Card title="MY MUSIC" />
-					</SwiperSlide>
-					<SwiperSlide>
-						<Card title="BUSINESS" />
-					</SwiperSlide>
-				</Swiper>
-			</CenterContent>
-			<MyModal
-				isOpen={modalIsOpen}
-				onAfterOpen={afterModalOpen}
-				onRequestClose={closeModal}
-				style={modalStyles}
-			>
-				<ImageModal currentImage={currentImage} />
-			</MyModal>
+						<SwiperSlide style={{ overflowY: "scroll" }}>
+							<Card title="ABOUT ME">
+								<AboutMe />
+							</Card>
+						</SwiperSlide>
+						<SwiperSlide style={{ overflowY: "scroll" }}>
+							<Card title="MY ART">
+								<ImageCollage folder="2D" onClickImage={openModal} />
+							</Card>
+						</SwiperSlide>
+						<SwiperSlide style={{ overflowY: "scroll" }}>
+							<Card title="MY 3D">
+								<ImageCollage folder="3D" onClickImage={openModal} />
+							</Card>
+						</SwiperSlide>
+					</Swiper>
+				</>
+			) : (
+				<>
+					<Background>{content}</Background>
+					<MyModal
+						isOpen={modalIsOpen}
+						onAfterOpen={afterModalOpen}
+						onRequestClose={closeModal}
+						style={modalStyles}
+					>
+						<ImageModal currentImage={currentImage} />
+					</MyModal>
+				</>
+			)}
 		</>
 	);
 };
@@ -190,10 +242,21 @@ const MyModal = styled(Modal)`
 `;
 
 const CenterContent = styled.div`
-	margin-top: 15vh;
-	width: 40vw;
+	margin-top: 12vh;
+	width: 50vw;
+	height: 55vh;
 	margin-left: auto;
 	margin-right: auto;
-	border: 3px solid ${theme.color.primary};
+	border: 2px solid ${theme.color.primary};
 	border-radius: 22px;
+	background-color: ${theme.color.backgroundLight};
+	overflow: hidden;
+`;
+
+const Background = styled.div`
+	background-image: url("/resources/bg.jpg");
+	background-size: 100% 100vh;
+	background-repeat: no-repeat;
+	display: flex;
+	height: 100vh;
 `;
