@@ -16,3 +16,6 @@ npm run dev
 
 ## Authors
 * [@Glaze96](https://github.com/Glaze96)
+
+## About
+This is a personal portfolio site for me, Glaze.
