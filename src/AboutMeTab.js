@@ -4,7 +4,7 @@ import { ResponsiveContext } from "./UseResposiveContext";
 import styled from "styled-components";
 import { theme } from "./UI/Theme";
 
-const AboutMe = () => {
+const AboutMeTab = () => {
 	const size = useContext(ResponsiveContext);
 
 	return (
@@ -41,7 +41,7 @@ const AboutMe = () => {
 	);
 };
 
-export default AboutMe;
+export default AboutMeTab;
 
 const FlexBox = styled.div`
 	display: flex;

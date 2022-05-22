@@ -17,7 +17,7 @@ import SwipeButton from "./SwipeButton";
 import ImageCollage from "./ImageCollage";
 import ImageModal from "./ImageModal";
 
-import AboutMe from "./AboutMe";
+import AboutMeTab from "./AboutMeTab";
 import { ResponsiveContext } from "./UseResposiveContext";
 
 const Content = () => {
@@ -129,9 +129,9 @@ const Content = () => {
 						<FaArrowRight size={35} />
 					</SwipeButton>
 				</div>
-				<SwiperSlide>
+				<SwiperSlide style={{ overflowY: "scroll" }}>
 					<Card title="ABOUT ME">
-						<AboutMe />
+						<AboutMeTab />
 					</Card>
 				</SwiperSlide>
 				<SwiperSlide style={{ overflowY: "scroll" }}>
@@ -200,7 +200,7 @@ const Content = () => {
 						</div>
 						<SwiperSlide style={{ overflowY: "scroll" }}>
 							<Card title="ABOUT ME">
-								<AboutMe />
+								<AboutMeTab />
 							</Card>
 						</SwiperSlide>
 						<SwiperSlide style={{ overflowY: "scroll" }}>
