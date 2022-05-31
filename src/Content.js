@@ -18,14 +18,16 @@ import ImageCollage from "./ImageCollage";
 import ImageModal from "./ImageModal";
 
 import AboutMeTab from "./AboutMeTab";
+import MusicTab from "./MusicTab";
 import { ResponsiveContext } from "./UseResposiveContext";
+import BusinessTab from "./BusinessTab";
 
 const Content = () => {
 	const [index, setIndex] = useState(0);
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [currentImage, setCurrentImage] = useState();
 
-	const numSlides = 3;
+	const numSlides = 5;
 
 	const SlideChangeHandler = (index) => {
 		let mod = index;
@@ -123,6 +125,20 @@ const Content = () => {
 								text="3D"
 								iconSize={35}
 							/>
+							<IconTextButton
+								IconComponent={FaHeadphonesAlt}
+								baseIndex={4}
+								currentIndex={index}
+								text="MUSIC"
+								iconSize={35}
+							/>
+							<IconTextButton
+								IconComponent={TiBusinessCard}
+								baseIndex={5}
+								currentIndex={index}
+								text="BUSINESS"
+								iconSize={35}
+							/>
 						</div>
 					</div>
 					<SwipeButton slide="right" text="RIGHT">
@@ -142,6 +158,16 @@ const Content = () => {
 				<SwiperSlide style={{ overflowY: "scroll" }}>
 					<Card title="MY 3D">
 						<ImageCollage folder="3D" onClickImage={openModal} />
+					</Card>
+				</SwiperSlide>
+				<SwiperSlide style={{ overflowY: "scroll" }}>
+					<Card title="MY MUSIC">
+						<MusicTab />
+					</Card>
+				</SwiperSlide>
+				<SwiperSlide style={{ overflowY: "scroll" }}>
+					<Card title="BUSINESS">
+						<BusinessTab />
 					</Card>
 				</SwiperSlide>
 			</Swiper>
@@ -172,6 +198,8 @@ const Content = () => {
 										display: "flex",
 										justifyContent: "space-between",
 										margin: 0,
+										flexDirection: "column",
+										backgroundColor: `${theme.color.background}`
 									}}
 								>
 									<IconTextButton
@@ -195,6 +223,20 @@ const Content = () => {
 										text="3D"
 										iconSize={35}
 									/>
+									<IconTextButton
+										IconComponent={FaHeadphonesAlt}
+										baseIndex={4}
+										currentIndex={index}
+										text="MUSIC"
+										iconSize={35}
+									/>
+									<IconTextButton
+										IconComponent={TiBusinessCard}
+										baseIndex={5}
+										currentIndex={index}
+										text="BUSINESS"
+										iconSize={35}
+									/>
 								</div>
 							</div>
 						</div>
@@ -211,6 +253,16 @@ const Content = () => {
 						<SwiperSlide style={{ overflowY: "scroll" }}>
 							<Card title="MY 3D">
 								<ImageCollage folder="3D" onClickImage={openModal} />
+							</Card>
+						</SwiperSlide>
+						<SwiperSlide style={{ overflowY: "scroll" }}>
+							<Card title="MY MUSIC">
+								<MusicTab />
+							</Card>
+						</SwiperSlide>
+						<SwiperSlide style={{ overflowY: "scroll" }}>
+							<Card title="BUSINESS">
+								<BusinessTab />
 							</Card>
 						</SwiperSlide>
 					</Swiper>
